@@ -148,7 +148,7 @@ __global__ void matMul(float* A, float* B, float* C, int N) {
 | ✅ **병렬처리 사용** | `threadIdx`, `blockIdx` 등 사용 필요 | E3003 |
 | ✅ **GPU 메모리 사용** | `cudaMalloc`, `cudaMemcpy` 사용 필요 | E3004 |
 | ✅ **커널 호출** | 정의된 커널을 `<<<>>>` 구문으로 호출 | E3001 |
-| ❌ **금지 함수 미사용** | `qsort`, `strcpy` 등 사용 불가 | E3005 |
+| ❌ **금지 함수 미사용** | `qsort`, STL 함수 등 사용 불가 | E3005 |
 | ❌ **금지 타입 미사용** | `std::vector`, `std::string` 등 사용 불가 | E3006 |
 
 ### 3.2 의미있는 커널 조건
@@ -440,6 +440,37 @@ fabs(), fmod()           // 절댓값/나머지
 fmin(), fmax()           // 최솟값/최댓값
 ```
 
+### 5.4 허용된 함수 (string.h / cstring)
+
+```c
+// 문자열 복사/연결
+strcpy()     // 문자열 복사
+strncpy()    // 문자열 복사 (n개 문자)
+strcat()     // 문자열 연결
+strncat()    // 문자열 연결 (n개 문자)
+
+// 문자열 비교
+strcmp()     // 문자열 비교
+strncmp()    // 문자열 비교 (n개 문자)
+
+// 문자열 검색
+strlen()     // 문자열 길이
+strchr()     // 문자 찾기 (처음)
+strrchr()    // 문자 찾기 (마지막)
+strstr()     // 부분 문자열 찾기
+strpbrk()    // 문자 집합에서 찾기
+strspn()     // 문자 집합 내 연속 길이
+strcspn()    // 문자 집합 외 연속 길이
+strtok()     // 토큰 분리
+
+// 메모리 조작
+memcpy()     // 메모리 복사
+memmove()    // 메모리 이동 (중첩 안전)
+memcmp()     // 메모리 비교
+memset()     // 메모리 설정
+memchr()     // 메모리에서 바이트 찾기
+```
+
 ---
 
 ## 6. 사용 금지 항목
@@ -452,28 +483,6 @@ fmin(), fmax()           // 최솟값/최댓값
 ```c
 qsort()      // ❌ 정렬 직접 구현 필요
 bsearch()    // ❌ 이진 탐색 직접 구현 필요
-```
-
-#### string.h / cstring 전체 금지
-```c
-// 문자열 복사/연결
-strcpy(), strncpy()   // ❌
-strcat(), strncat()   // ❌
-
-// 문자열 비교
-strcmp(), strncmp()   // ❌
-
-// 문자열 검색
-strlen()              // ❌
-strchr(), strrchr()   // ❌
-strstr(), strpbrk()   // ❌
-strspn(), strcspn()   // ❌
-strtok()              // ❌
-
-// 메모리 조작 (string.h)
-memcpy(), memmove()   // ❌ (cudaMemcpy는 허용)
-memcmp(), memset()    // ❌ (cudaMemset은 허용)
-memchr()              // ❌
 ```
 
 #### STL algorithm 함수
@@ -922,21 +931,7 @@ int* arr = (int*)malloc(N * sizeof(int));
 **A:** 정상입니다. CPU 에뮬레이션에서는 모든 연산이 동기적으로 실행되므로 
 경과 시간 측정이 의미가 없습니다.
 
-### Q4: `string.h` 함수는 왜 금지인가요?
-
-**A:** 알고리즘을 직접 구현하는 학습을 위해서입니다. 
-`strlen`, `strcpy` 대신 직접 루프를 작성하세요.
-
-```cuda
-// strlen 대체
-__device__ int myStrlen(const char* s) {
-    int len = 0;
-    while (s[len] != '\0') len++;
-    return len;
-}
-```
-
-### Q5: E3003 (NO_PARALLELISM) 에러가 발생해요.
+### Q4: E3003 (NO_PARALLELISM) 에러가 발생해요.
 
 **A:** 커널 내에서 `threadIdx`, `blockIdx` 등 병렬처리 변수를 사용해야 합니다.
 
@@ -953,7 +948,7 @@ __global__ void kernel(int* arr) {
 }
 ```
 
-### Q6: 동적 공유 메모리는 어떻게 사용하나요?
+### Q5: 동적 공유 메모리는 어떻게 사용하나요?
 
 **A:** `extern __shared__`와 커널 런치 시 세 번째 인자를 사용합니다.
 
@@ -973,7 +968,7 @@ int main() {
 }
 ```
 
-### Q7: 왜 cudaMemcpy 방향 검증 에러(E2001)가 발생하나요?
+### Q6: 왜 cudaMemcpy 방향 검증 에러(E2001)가 발생하나요?
 
 **A:** `cudaMalloc`으로 할당한 포인터와 호스트 포인터의 방향이 맞지 않습니다.
 
@@ -993,7 +988,7 @@ cudaMemcpy(h_arr, d_arr, size, cudaMemcpyDeviceToHost);
 
 ---
 
-**버전**: 2.0.0  
+**버전**: 2.1.0  
 **최종 업데이트**: 2025년 12월
 
 ---
