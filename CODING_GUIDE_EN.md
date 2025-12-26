@@ -148,7 +148,7 @@ Submitted code must pass the following validations:
 | ✅ **Uses parallelism** | Must use `threadIdx`, `blockIdx`, etc. | E3003 |
 | ✅ **Uses GPU memory** | Must use `cudaMalloc`, `cudaMemcpy` | E3004 |
 | ✅ **Kernel called** | Must call defined kernel with `<<<>>>` syntax | E3001 |
-| ❌ **No forbidden functions** | Cannot use `qsort`, `strcpy`, etc. | E3005 |
+| ❌ **No forbidden functions** | Cannot use `qsort`, STL functions, etc. | E3005 |
 | ❌ **No forbidden types** | Cannot use `std::vector`, `std::string`, etc. | E3006 |
 
 ### 3.2 Meaningful Kernel Conditions
@@ -440,6 +440,37 @@ fabs(), fmod()           // Absolute value/modulo
 fmin(), fmax()           // Minimum/maximum
 ```
 
+### 5.4 Allowed Functions (string.h / cstring)
+
+```c
+// String copy/concatenate
+strcpy()     // String copy
+strncpy()    // String copy (n characters)
+strcat()     // String concatenate
+strncat()    // String concatenate (n characters)
+
+// String comparison
+strcmp()     // String compare
+strncmp()    // String compare (n characters)
+
+// String search
+strlen()     // String length
+strchr()     // Find character (first)
+strrchr()    // Find character (last)
+strstr()     // Find substring
+strpbrk()    // Find any character from set
+strspn()     // Span of characters in set
+strcspn()    // Span of characters not in set
+strtok()     // Tokenize string
+
+// Memory manipulation
+memcpy()     // Memory copy
+memmove()    // Memory move (overlap safe)
+memcmp()     // Memory compare
+memset()     // Memory set
+memchr()     // Find byte in memory
+```
+
 ---
 
 ## 6. Prohibited Items
@@ -452,28 +483,6 @@ fmin(), fmax()           // Minimum/maximum
 ```c
 qsort()      // ❌ Must implement sorting yourself
 bsearch()    // ❌ Must implement binary search yourself
-```
-
-#### string.h / cstring Entirely Prohibited
-```c
-// String copy/concatenate
-strcpy(), strncpy()   // ❌
-strcat(), strncat()   // ❌
-
-// String comparison
-strcmp(), strncmp()   // ❌
-
-// String search
-strlen()              // ❌
-strchr(), strrchr()   // ❌
-strstr(), strpbrk()   // ❌
-strspn(), strcspn()   // ❌
-strtok()              // ❌
-
-// Memory manipulation (string.h)
-memcpy(), memmove()   // ❌ (cudaMemcpy is allowed)
-memcmp(), memset()    // ❌ (cudaMemset is allowed)
-memchr()              // ❌
 ```
 
 #### STL algorithm Functions
@@ -922,21 +931,7 @@ Actual performance testing should be done in a GPU environment.
 **A:** This is normal. In CPU emulation, all operations are executed synchronously,
 so elapsed time measurement is meaningless.
 
-### Q4: Why are `string.h` functions prohibited?
-
-**A:** For learning to implement algorithms yourself.
-Instead of `strlen`, `strcpy`, write your own loops.
-
-```cuda
-// strlen replacement
-__device__ int myStrlen(const char* s) {
-    int len = 0;
-    while (s[len] != '\0') len++;
-    return len;
-}
-```
-
-### Q5: I'm getting E3003 (NO_PARALLELISM) error.
+### Q4: I'm getting E3003 (NO_PARALLELISM) error.
 
 **A:** You must use parallelism variables like `threadIdx`, `blockIdx` inside the kernel.
 
@@ -953,7 +948,7 @@ __global__ void kernel(int* arr) {
 }
 ```
 
-### Q6: How do I use dynamic shared memory?
+### Q5: How do I use dynamic shared memory?
 
 **A:** Use `extern __shared__` and the third argument in kernel launch.
 
@@ -973,7 +968,7 @@ int main() {
 }
 ```
 
-### Q7: Why am I getting cudaMemcpy direction error (E2001)?
+### Q6: Why am I getting cudaMemcpy direction error (E2001)?
 
 **A:** The direction doesn't match between pointers allocated with `cudaMalloc` and host pointers.
 
@@ -993,7 +988,7 @@ cudaMemcpy(h_arr, d_arr, size, cudaMemcpyDeviceToHost);
 
 ---
 
-**Version**: 2.0.0  
+**Version**: 2.1.0  
 **Last Updated**: December 2025
 
 ---
