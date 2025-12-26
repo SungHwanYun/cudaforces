@@ -2,9 +2,6 @@
 
 **A GPU Programming Learning Platform - Online Judge for CUDA**
 
-[![CUDA](https://img.shields.io/badge/CUDA-Educational-76B900?style=flat&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-
 CUDAForces is an educational online judge platform designed for learning GPU programming. Write and test CUDA code without requiring actual GPU hardware through our innovative CPU Transpiler technology.
 
 ---
@@ -308,35 +305,9 @@ cudaforces/
 
 ---
 
-## 📖 Documentation
-
-- [English Coding Guide](docs/CODING_GUIDE_EN.md)
-- [한국어 코딩 가이드](docs/CODING_GUIDE_KO.md)
-- [Transpiler Development Guide](transpiler/docs/GUIDE.md)
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit issues and pull requests.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
 ## 📧 Contact
 
 For questions or support, please contact: **ejpark29@gmail.com**
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
