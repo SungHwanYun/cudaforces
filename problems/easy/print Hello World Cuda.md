@@ -50,34 +50,7 @@ int main() {
 }
 ```
 
-### About CUDA Online Judge
-
-CUDA Online Judge is designed for **educational purposes**. To help users learn proper GPU programming patterns:
-
-1. **Minimal Library Policy**: Only essential libraries are allowed to encourage learning C-style memory management and algorithm implementation from scratch.
-
-2. **Parallelism Validation**: The system performs validation checks to ensure your code follows proper CUDA parallel programming patterns:
-   - Must have at least one `__global__` kernel function
-   - Must use parallelism variables (`threadIdx`, `blockIdx`, etc.)
-   - Must use GPU memory management (`cudaMalloc`, `cudaMemcpy`, etc.)
-
-These requirements ensure that users learn authentic CUDA programming skills rather than bypassing GPU concepts.
-
-### Automatically Included Libraries
-
-CUDA Online Judge automatically includes the following libraries:
-
-| Library | Description |
-|---------|-------------|
-| `stdio.h` / `cstdio` | Standard I/O (`printf`, `scanf`) |
-| `stdlib.h` / `cstdlib` | Memory allocation (`malloc`, `free`) |
-| `string.h` / `cstring` | Limited functions (`memset`, `memcpy`) |
-| `math.h` / `cmath` | Math functions (`sqrt`, `sin`, `cos`) |
-| `stdint.h` / `cstdint` | Fixed-width integers (`int32_t`, `uint64_t`) |
-| `stdbool.h` / `cstdbool` | Boolean type |
-| `float.h` / `cfloat` | Float limits |
-| `limits.h` / `climits` | Integer limits |
-| `cuda_runtime.h` | CUDA runtime API (auto-included) |
+> 📚 New to CUDA OJ? Read the [CUDA Online Judge Guide](../../GUIDE.md) first.
 
 ### Why This Code Structure?
 
@@ -255,12 +228,6 @@ printf("Hello World CUDA\n");  // "CUDA" vs "Cuda" - case matters!
 1. Modify the kernel to launch with `<<<1, 5>>>` and observe what happens without the `if` condition
 2. Try launching with `<<<5, 1>>>` and use `blockIdx.x` instead of `threadIdx.x`
 3. Remove `cudaDeviceSynchronize()` and see if the output still appears
-
----
-
-## Related Problems
-- Problem 002: Hello from Thread (introduces `threadIdx`)
-- Problem 003: Hello from Block (introduces `blockIdx`)
 
 ---
 
