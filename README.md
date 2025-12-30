@@ -25,14 +25,12 @@ This repository provides **documentation, guides, and resources** for:
 ```
 cudaforces/
 ├── docs/
-│   ├── GUIDE.md              # Quick start guide
-│   ├── CODING_GUIDE_EN.md    # Comprehensive coding guide (English)
-│   ├── CODING_GUIDE_KO.md    # Comprehensive coding guide (Korean)
+│   ├── QUICK_GUIDE.md              # Quick start guide
+│   ├── COMPLETE_GUIDE_EN.md    # Comprehensive coding guide (English)
 │   └── PUBLIC_API.md         # Public API documentation
 │
 ├── problems/                  # Example problems with solutions
 │   ├── easy/
-│   │   └── print-hello-world-cuda-n-times.md
 │   ├── medium/
 │   └── hard/
 │
