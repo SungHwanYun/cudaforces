@@ -16,8 +16,6 @@ This repository provides **documentation, guides, and resources** for:
 - 🔧 **Building Tools** — Public API documentation for developers
 - 🎯 **Problem Solving** — Example solutions and coding patterns
 
-> ⚠️ **Note**: This repository does not contain the platform's source code. It's a resource hub for learners and developers.
-
 ---
 
 ## 📁 Repository Structure
