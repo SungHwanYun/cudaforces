@@ -43,8 +43,8 @@ cudaforces/
 
 | Document | Description |
 |----------|-------------|
-| [**GUIDE.md**](docs/GUIDE.md) | Quick introduction to CUDA Online Judge |
-| [**CODING_GUIDE_EN.md**](docs/CODING_GUIDE_EN.md) | Complete coding guide with examples and FAQ |
+| [**QUICK_GUIDE.md**](docs/QUICK_GUIDE.md) | Quick introduction to CUDA Online Judge |
+| [**COMPLETE_GUIDE.md**](docs/COMPLETE_GUIDE.md) | Complete coding guide with examples and FAQ |
 | [**PUBLIC_API.md**](docs/PUBLIC_API.md) | API reference for building external tools |
 
 ---
@@ -170,7 +170,7 @@ This ensures you learn authentic CUDA programming patterns!
 ## 🚀 Getting Started
 
 1. **Visit** [cudaforces.com](https://cudaforces.com)
-2. **Read** the [Coding Guide](docs/CODING_GUIDE_EN.md)
+2. **Read** the [Coding Guide](docs/QUICK_GUIDE.md)
 3. **Start** with Easy problems
 4. **Build** tools using the [Public API](docs/PUBLIC_API.md)
 
