@@ -438,7 +438,7 @@ def api_call_with_retry(url, max_retries=3):
 
 ## Changelog
 
-### v1.0.0 (2024-12-30)
+### v1.0.0 (2025-12-30)
 - Initial release
 - Problem list/detail/statistics endpoints
 - Rankings endpoint
