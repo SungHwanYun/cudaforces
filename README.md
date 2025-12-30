@@ -2,7 +2,7 @@
 
 **Learn GPU Programming Without a GPU**
 
-CUDA Online Judge (CUDAForces) is an educational platform for learning CUDA programming. Practice GPU programming concepts without expensive hardware through our innovative CPU Transpiler technology.
+CUDA Online Judge (cudaforces) is an educational platform for learning CUDA programming. Practice GPU programming concepts without expensive hardware through our innovative CPU Transpiler technology.
 
 > 🌐 **Website**: [cudaforces.com](https://cudaforces.com)
 
@@ -23,11 +23,11 @@ This repository provides **documentation, guides, and resources** for:
 ```
 cudaforces/
 ├── docs/
-│   ├── QUICK_GUIDE.md              # Quick start guide
-│   ├── COMPLETE_GUIDE_EN.md    # Comprehensive coding guide (English)
-│   └── PUBLIC_API.md         # Public API documentation
+│   ├── QUICK_GUIDE.md          # Quick start guide
+│   ├── COMPLETE_GUIDE_EN.md    # Comprehensive coding guide
+│   └── PUBLIC_API.md           # Public API documentation
 │
-├── problems/                  # Example problems with solutions
+├── problems/                   # Example problems with solutions
 │   ├── easy/
 │   ├── medium/
 │   └── hard/
